@@ -18,19 +18,41 @@ class PGCFNotificationCenterTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+    func testRegistration() throws {
+        let notificationCenter = PGDarwinNotificationCenter.shared
+        let receipt = notificationCenter.registerNotification("PresetLicenseNeedsUpdate") {}
+        var result = notificationCenter.containsReceipt(receipt.receiptId)
+        XCTAssert(result == true)
+        result = notificationCenter.containsNotification("PresetLicenseNeedsUpdate")
+        XCTAssert(result == true)
+        result = notificationCenter.containsReceipt(UUID().uuidString)
+        XCTAssert(result == false)
+        result = notificationCenter.containsNotification("AABB")
+        XCTAssert(result == false)
     }
 
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    func testReceiptInvalidation() throws {
+        let notificationCenter = PGDarwinNotificationCenter.shared
+        let receipt = notificationCenter.registerNotification("TestReceiptInvalidation") {}
+        var result = notificationCenter.containsReceipt(receipt.receiptId)
+        XCTAssert(result == true)
+        receipt.invalidate()
+        result = notificationCenter.containsReceipt(receipt.receiptId)
+        XCTAssert(result == false)
+        result = notificationCenter.containsNotification(receipt.notificationId)
+        XCTAssert(result == false)
+    }
+   
+    func testPostNotification() throws {
+        let expectation = XCTestExpectation(description: "Expect notification happens")
+        let notificationCenter = PGDarwinNotificationCenter.shared
+        let receipt = notificationCenter.registerNotification("NewAction") {
+            expectation.fulfill()
         }
+        notificationCenter.postNotification("NewAction")
+        wait(for: [expectation], timeout: 2.0)
+        receipt.invalidate()
+        XCTAssert(notificationCenter.containsReceipt(receipt.receiptId) == false)
+        XCTAssert(notificationCenter.containsReceipt(receipt.notificationId) == false)
     }
-
 }

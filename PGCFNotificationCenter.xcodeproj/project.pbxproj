@@ -10,6 +10,10 @@
 		658047B22807E979006F7A9E /* PGCFNotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658047A92807E979006F7A9E /* PGCFNotificationCenter.framework */; };
 		658047B72807E979006F7A9E /* PGCFNotificationCenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658047B62807E979006F7A9E /* PGCFNotificationCenterTests.swift */; };
 		658047B82807E979006F7A9E /* PGCFNotificationCenter.h in Headers */ = {isa = PBXBuildFile; fileRef = 658047AC2807E979006F7A9E /* PGCFNotificationCenter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		658047C42807EC3E006F7A9E /* PGDarwinNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658047C32807EC3E006F7A9E /* PGDarwinNotificationCenter.swift */; };
+		658047C52807EC3E006F7A9E /* PGDarwinNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658047C32807EC3E006F7A9E /* PGDarwinNotificationCenter.swift */; };
+		658047C72807F070006F7A9E /* Cancellable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658047C62807F070006F7A9E /* Cancellable.swift */; };
+		658047C82807F070006F7A9E /* Cancellable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658047C62807F070006F7A9E /* Cancellable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,6 +31,8 @@
 		658047AC2807E979006F7A9E /* PGCFNotificationCenter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PGCFNotificationCenter.h; sourceTree = "<group>"; };
 		658047B12807E979006F7A9E /* PGCFNotificationCenterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PGCFNotificationCenterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		658047B62807E979006F7A9E /* PGCFNotificationCenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PGCFNotificationCenterTests.swift; sourceTree = "<group>"; };
+		658047C32807EC3E006F7A9E /* PGDarwinNotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PGDarwinNotificationCenter.swift; sourceTree = "<group>"; };
+		658047C62807F070006F7A9E /* Cancellable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cancellable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +57,7 @@
 		6580479F2807E979006F7A9E = {
 			isa = PBXGroup;
 			children = (
+				658047C12807E9E6006F7A9E /* Sources */,
 				658047AB2807E979006F7A9E /* PGCFNotificationCenter */,
 				658047B52807E979006F7A9E /* PGCFNotificationCenterTests */,
 				658047AA2807E979006F7A9E /* Products */,
@@ -80,6 +87,23 @@
 				658047B62807E979006F7A9E /* PGCFNotificationCenterTests.swift */,
 			);
 			path = PGCFNotificationCenterTests;
+			sourceTree = "<group>";
+		};
+		658047C12807E9E6006F7A9E /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				658047C22807EA14006F7A9E /* PGCFNotificationCenter */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		658047C22807EA14006F7A9E /* PGCFNotificationCenter */ = {
+			isa = PBXGroup;
+			children = (
+				658047C32807EC3E006F7A9E /* PGDarwinNotificationCenter.swift */,
+				658047C62807F070006F7A9E /* Cancellable.swift */,
+			);
+			path = PGCFNotificationCenter;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -144,6 +168,7 @@
 				TargetAttributes = {
 					658047A82807E979006F7A9E = {
 						CreatedOnToolsVersion = 13.3;
+						LastSwiftMigration = 1330;
 					};
 					658047B02807E979006F7A9E = {
 						CreatedOnToolsVersion = 13.3;
@@ -191,6 +216,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				658047C72807F070006F7A9E /* Cancellable.swift in Sources */,
+				658047C42807EC3E006F7A9E /* PGDarwinNotificationCenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -198,6 +225,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				658047C82807F070006F7A9E /* Cancellable.swift in Sources */,
+				658047C52807EC3E006F7A9E /* PGDarwinNotificationCenter.swift in Sources */,
 				658047B72807E979006F7A9E /* PGCFNotificationCenterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -336,6 +365,8 @@
 		658047BC2807E979006F7A9E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -356,6 +387,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -364,6 +396,8 @@
 		658047BD2807E979006F7A9E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -392,6 +426,7 @@
 		658047BF2807E979006F7A9E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = SKLFZ4533Y;
@@ -408,6 +443,7 @@
 		658047C02807E979006F7A9E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = SKLFZ4533Y;
