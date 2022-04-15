@@ -11,7 +11,7 @@ protocol CancellableReceiptDelegate: AnyObject {
     func receiptRequestToReleaseResource(_ receipt: CancellableReceipt)
 }
 
-class CancellableReceipt {
+public class CancellableReceipt {
     private(set) var notificationId: String
     private(set) var receiptId: String
     private weak var delegate: CancellableReceiptDelegate?

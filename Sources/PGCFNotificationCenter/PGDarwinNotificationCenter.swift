@@ -13,7 +13,7 @@ public class PGDarwinNotificationCenter: CancellableReceiptDelegate {
     typealias ReceiptId = String
     typealias NotificationId = String
     
-    static let shared = PGDarwinNotificationCenter()
+    public static let shared = PGDarwinNotificationCenter()
     
     private init(){}
     
