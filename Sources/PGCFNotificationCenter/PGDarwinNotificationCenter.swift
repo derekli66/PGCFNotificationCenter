@@ -9,9 +9,9 @@ import Foundation
 import CoreFoundation
 
 public class PGDarwinNotificationCenter: CancellableReceiptDelegate {
-    typealias Callback = () -> Void
-    typealias ReceiptId = String
-    typealias NotificationId = String
+    public typealias Callback = () -> Void
+    public typealias ReceiptId = String
+    public typealias NotificationId = String
     
     public static let shared = PGDarwinNotificationCenter()
     
@@ -24,7 +24,7 @@ public class PGDarwinNotificationCenter: CancellableReceiptDelegate {
     
     fileprivate var callbackMap = Dictionary<NotificationId, [Action]>()
     
-    func postNotification(_ notification: NotificationId) {
+    public func postNotification(_ notification: NotificationId) {
         let center = CFNotificationCenterGetDarwinNotifyCenter()
         CFNotificationCenterPostNotification(center,
                                              CFNotificationName(notification as CFString),
@@ -33,7 +33,7 @@ public class PGDarwinNotificationCenter: CancellableReceiptDelegate {
                                              true)
     }
     
-    func registerNotification(_ notificationId: NotificationId, callback: @escaping Callback) -> CancellableReceipt {
+    public func registerNotification(_ notificationId: NotificationId, callback: @escaping Callback) -> CancellableReceipt {
         let cancellableReceipt = CancellableReceipt(notificationId: notificationId,
                                                     receiptId: UUID().uuidString,
                                                     delegate: self)
@@ -102,11 +102,11 @@ public class PGDarwinNotificationCenter: CancellableReceiptDelegate {
                                            nil)
     }
         
-    func containsNotification(_ notificationId: NotificationId) -> Bool {
+    public func containsNotification(_ notificationId: NotificationId) -> Bool {
         return callbackMap[notificationId] != nil
     }
     
-    func containsReceipt(_ receiptId: ReceiptId) -> Bool {
+    public func containsReceipt(_ receiptId: ReceiptId) -> Bool {
         var didContain = false
         
         for actions in callbackMap.values {
