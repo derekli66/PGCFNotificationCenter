@@ -46,11 +46,16 @@ class PGCFNotificationCenterTests: XCTestCase {
     func testPostNotification() throws {
         let expectation = XCTestExpectation(description: "Expect notification happens")
         let notificationCenter = PGDarwinNotificationCenter.shared
+        var counter = 0
         let receipt = notificationCenter.registerNotification("NewAction") {
-            expectation.fulfill()
+            counter += 1
+            if counter == 1 {
+                expectation.fulfill()
+            }
         }
         notificationCenter.postNotification("NewAction")
-        wait(for: [expectation], timeout: 2.0)
+        wait(for: [expectation], timeout: 3.0)
+        XCTAssert(counter == 1)
         receipt.invalidate()
         XCTAssert(notificationCenter.containsReceipt(receipt.receiptId) == false)
         XCTAssert(notificationCenter.containsReceipt(receipt.notificationId) == false)
